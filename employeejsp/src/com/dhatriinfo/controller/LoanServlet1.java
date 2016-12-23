@@ -1,9 +1,7 @@
 package com.dhatriinfo.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,16 +15,16 @@ import com.dhatriinfo.bean.EmployeeBean;
 import com.dhatriinfo.dao.DAOOperations;
 
 /**
- * Servlet implementation class SearchServlet
+ * Servlet implementation class LoanServlet1
  */
-@WebServlet("/SearchServlet")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/LoanServlet1")
+public class LoanServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchServlet() {
+    public LoanServlet1() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,39 +34,26 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setContentType("text/html");
 		
-		String searchElement=request.getParameter("dropdwn");
+		String tempid=request.getParameter("tempid");
+
+		DAOOperations dbo=new DAOOperations();
+		ArrayList<EmployeeBean> list=dbo.loanUpdate(tempid);		
+		RequestDispatcher requestDispact=request.getRequestDispatcher("Sucess.jsp");
 		
-		if(searchElement.equals("id"))
-		{
-			RequestDispatcher requestDis=request.getRequestDispatcher("Search2.jsp");
-			
-			requestDis.forward(request, response);
+		HttpSession session=request.getSession();
+		session.setAttribute("Eid", tempid);
 		
-		}
-		
-		else if(searchElement.equals("name"))
-		 
-		{
-			
-			RequestDispatcher requestDis=request.getRequestDispatcher("Search.jsp");
-			requestDis.forward(request, response);
-			
-		}
-		else if(searchElement.equals("sal"))
-			 
-		{
-			RequestDispatcher requestDis=request.getRequestDispatcher("Search3.jsp");
-			
-			requestDis.forward(request, response);
-		}
-		
+		requestDispact.forward(request, response);
 	}
 
 }

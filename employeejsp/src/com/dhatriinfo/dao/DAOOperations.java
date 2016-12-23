@@ -20,7 +20,7 @@ public class DAOOperations {
 
 	public int insertData(EmployeeBean employeeBean) {
 		int result = 0;
-		String query = "insert into employee values(?,?,?,?,?,?)";
+		String query = "insert into employee values(?,?,?,?,?,?,?)";
 
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -30,6 +30,7 @@ public class DAOOperations {
 			preparedStatement.setString(4, employeeBean.getEmployeeLoc());
 			preparedStatement.setInt(5, employeeBean.getEmployeeLoan());
 			preparedStatement.setInt(6, employeeBean.getEmployeeExp());
+			preparedStatement.setInt(7, employeeBean.getEmployeeExp());
 
 			result = preparedStatement.executeUpdate();
 
@@ -47,7 +48,7 @@ public class DAOOperations {
 	{
 		ArrayList<EmployeeBean> employeeList=new ArrayList<EmployeeBean>();
 		
-		String query="select employeeId,employeeName,employeeSlary,employeeLoc,employeeExp,employeeLoan from employee where employeeId=?";
+		String query="select employeeId,employeeName,employeeSlary,employeeLoc,employeeExp,employeeLoan,employeeEmi from employee where employeeId=?";
 		
 		try {
 			preparedStatement=connection.prepareStatement(query);
@@ -66,6 +67,7 @@ public class DAOOperations {
 				empBean.setEmployeeLoc(resultSet.getString(4));
 				empBean.setEmployeeExp(resultSet.getInt(5));
 				empBean.setEmployeeLoan(resultSet.getInt(6));
+				empBean.setEmployeeEmi(resultSet.getInt(6));
 				employeeList.add(empBean);
 				
 			}
@@ -85,7 +87,7 @@ public class DAOOperations {
 	{
 		ArrayList<EmployeeBean> employeeList=new ArrayList<EmployeeBean>();
 		
-		String query="select employeeId,employeeName,employeeSlary,employeeLoc,employeeExp,employeeLoan from employee where employeeName=?";
+		String query="select employeeId,employeeName,employeeSlary,employeeLoc,employeeExp,employeeLoan,employeeEmi from employee where employeeName=?";
 		
 		try {
 			preparedStatement=connection.prepareStatement(query);
@@ -104,6 +106,7 @@ public class DAOOperations {
 				empBean.setEmployeeLoc(resultSet.getString(4));
 				empBean.setEmployeeExp(resultSet.getInt(5));
 				empBean.setEmployeeLoan(resultSet.getInt(6));
+				empBean.setEmployeeEmi(resultSet.getInt(6));
 				employeeList.add(empBean);
 				
 			}
@@ -123,7 +126,7 @@ public class DAOOperations {
 	{
 		ArrayList<EmployeeBean> employeeList=new ArrayList<EmployeeBean>();
 		
-		String query="select employeeId,employeeName,employeeSlary,employeeLoc,employeeExp,employeeLoan from employee where employeeSlary=?";
+		String query="select employeeId,employeeName,employeeSlary,employeeLoc,employeeExp,employeeLoan,employeeEmi from employee where employeeSlary=?";
 		
 		try {
 			preparedStatement=connection.prepareStatement(query);
@@ -142,6 +145,7 @@ public class DAOOperations {
 				empBean.setEmployeeLoc(resultSet.getString(4));
 				empBean.setEmployeeExp(resultSet.getInt(5));
 				empBean.setEmployeeLoan(resultSet.getInt(6));
+				empBean.setEmployeeEmi(resultSet.getInt(6));
 				employeeList.add(empBean);
 				
 			}
@@ -158,7 +162,7 @@ public class DAOOperations {
 		return employeeList;
 	}
 	
-	public int update(String eId,String empName,int empSalary,int empExp,String empLoc,int empLoan )
+	public int update(EmployeeBean emp)
 	{
 		int x=0;
 		String query="update employee set employeeName=?,employeeSlary=?,employeeLoc=?,employeeLoan=?,employeeExp=? where employeeId=?";
@@ -166,13 +170,13 @@ public class DAOOperations {
 	{
 		preparedStatement=connection.prepareStatement(query);
 		
-		preparedStatement.setString(1,empName);
-		preparedStatement.setInt(2,empSalary);
-		preparedStatement.setString(3,empLoc);
-		preparedStatement.setInt(4,empLoan);
-		preparedStatement.setInt(5,empExp);
+		preparedStatement.setString(1,emp.getEmployeeName());
+		preparedStatement.setInt(2,emp.getEmployeeSlary());
+		preparedStatement.setString(3,emp.getEmployeeLoc());
+		preparedStatement.setInt(4,emp.getEmployeeLoan());
+		preparedStatement.setInt(5,emp.getEmployeeExp());
 		
-		preparedStatement.setString(6,eId);
+		preparedStatement.setString(6,emp.getEmployeeId());
 		
 		x=	preparedStatement.executeUpdate();
 		
@@ -208,10 +212,12 @@ return x;
 		}
 		return x;
 	}	
-	public int loan(int eLoan,String Id) throws Exception
+	public ArrayList<EmployeeBean> loan(String Id)
 	
 	{
-		int x=0;
+		
+		int eLoan;
+		int emi;
 		ArrayList<EmployeeBean> loe=search(Id);
 		Iterator<EmployeeBean> itt=loe.iterator();
 		EmployeeBean ee=null;
@@ -219,12 +225,12 @@ return x;
 		{
 		ee=(EmployeeBean)itt.next();
 		
-		if(ee.getEmployeeExp()>2 && ee.getEmployeeExp()<4)
+		if(ee.getEmployeeExp()>=2 && ee.getEmployeeExp()<4)
 		{
 			eLoan=ee.getEmployeeSlary()/2;
 			ee.setEmployeeLoan(eLoan);
-			System.out.println("loan=" +eLoan);
-			
+			emi=(ee.getEmployeeLoan())*14/900;
+			ee.setEmployeeEmi(emi);
 		}
 		else
 		{
@@ -233,15 +239,42 @@ return x;
 			
 		}
 	}
-		String query="update employee set employeeLoan=? where employeeId=?";
-
-		preparedStatement=connection.prepareStatement(query);
-		preparedStatement.setInt(1, eLoan);
-		preparedStatement.setString(2, Id);
-	     x=preparedStatement.executeUpdate();
-		
-		System.out.println("Updated rows="+x);		
-		return x;
+		return loe;
 	}
-	
+		
+	public ArrayList<EmployeeBean> loanUpdate(String tempid)
+		{
+			ArrayList<EmployeeBean> employeeList=loan(tempid);
+			
+			EmployeeBean empBean=null;
+		
+			String query="update employee set employeeLoan=?,employeeEmi=? where employeeId=?";
+		
+
+			try {
+				
+				Iterator it=employeeList.iterator();
+				while(it.hasNext())
+				{
+					empBean=(EmployeeBean)it.next();
+				preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setInt(1, empBean.getEmployeeLoan());
+				preparedStatement.setInt(2, empBean.getEmployeeEmi());
+				preparedStatement.setString(3, tempid);
+				
+				preparedStatement.executeUpdate();
+				}
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			return employeeList;
+		}
 }
+

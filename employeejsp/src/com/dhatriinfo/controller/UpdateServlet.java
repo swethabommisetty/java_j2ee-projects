@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dhatriinfo.bean.EmployeeBean;
 import com.dhatriinfo.dao.DAOOperations;
 
 /**
@@ -42,28 +43,21 @@ public class UpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
         response.setContentType("text/html");  
-		
-		String eid=request.getParameter("employeeId");
-		String ename=request.getParameter("employeeName");
-		String esal=request.getParameter("employeeSalary");
-		String eloc=request.getParameter("employeeLocation");
-		String eexp=request.getParameter("employeeExp");
-		String eloan=request.getParameter("employeeLoan");
-		int sal;
-		int exp,loan;
-		try
-		{
-			sal=Integer.parseInt(esal);
-			exp=Integer.parseInt(eexp);
-			loan=Integer.parseInt(eloan);
-		}
-		catch(Exception m)
-		{
-			sal=0;
-			exp=0;loan=0;
-		}
+		EmployeeBean e=new EmployeeBean();
+		String eid=request.getParameter("eid");
+		String ename=request.getParameter("ename");
+		String esal=request.getParameter("esal");
+		String eloc=request.getParameter("eloc");
+		String eexp=request.getParameter("eexp");
+		int sal=Integer.parseInt(esal);
+		int exp=Integer.parseInt(eexp);
+		e.setEmployeeId(eid);
+		e.setEmployeeName(ename);
+		e.setEmployeeSlary(sal);
+		e.setEmployeeLoc(eloc);
+		e.setEmployeeExp(exp);
 		DAOOperations dbo=new DAOOperations();
-		int res=dbo.update(eid, ename, sal, exp, eloc, loan);
+		int res=dbo.update(e);
 RequestDispatcher requestDispact=request.getRequestDispatcher("Success.jsp");
 		
 		HttpSession session=request.getSession();

@@ -2,6 +2,7 @@ package com.dhatriinfo.controller;
 import com.dhatriinfo.bean.*;
 import com.dhatriinfo.dao.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,6 +40,7 @@ public class InsertServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out=response.getWriter();
 		String employeeId=request.getParameter("employeeId");
 		String employeeName=request.getParameter("employeeName");
 		String employeeSalary=request.getParameter("employeeSalary");
@@ -63,7 +65,7 @@ public class InsertServlet extends HttpServlet {
 		employeeBean.setEmployeeSlary(salary);
 		employeeBean.setEmployeeExp(exp);
 		employeeBean.setEmployeeLoc(employeeLocation);
-		
+		out.print(employeeId);
 		DAOOperations dao=new DAOOperations();
 		int result=dao.insertData(employeeBean);
 		

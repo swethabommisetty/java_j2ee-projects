@@ -51,7 +51,7 @@ String searchsal=request.getParameter("searchElement");
 		
 		HttpSession session=request.getSession();
 		session.setAttribute("employeeList", empList);
-		RequestDispatcher requestDis=request.getRequestDispatcher("Search.jsp");
+		RequestDispatcher requestDis=request.getRequestDispatcher("Search3.jsp");
 		
 		requestDis.forward(request, response);
 	}

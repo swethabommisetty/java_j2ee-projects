@@ -1,10 +1,15 @@
 function validation()
 {
-var empid=document.getElementById(employeeId).value;
-if(empid==" "||empid==null)
+var empid=document.getElementById("employeeid").value;
+if(empid==""||empid==null)
 	{
-	alert("please enter id");
+	document.getElementById("error").innerHTML="please enter id ";
 	return false;
 	}
+else
 return true;
+}
+function clearField()
+{
+	document.getElementById("error").innerHTML=" ";
 }

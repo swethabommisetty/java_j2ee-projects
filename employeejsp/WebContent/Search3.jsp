@@ -10,10 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="SearchSalServlet" method="post">
 
-<form action="SearchNameServlet" method="post">
-
-Enter name to search:<input type="text" name="searchElement"/>
+Enter sal to search:<input type="text" name="searchElement"/>
 <input type="submit" value="Search">
 </form>
 
@@ -68,9 +67,6 @@ else
 <form>
 <a href="Sample.jsp">go back to home page</a>
 </form>
-
 </div>
-
-
 </body>
 </html>

@@ -14,7 +14,7 @@
 <a href="Insert.jsp">Insert an employee</a>
 <a href="Delete.jsp">Delete an employee</a>
 <a href="Update.jsp">Update an employee</a>
-<a href="Search.jsp">search an employee</a>
+<a href="Search1.jsp">search an employee</a>
 <a href="Loan.jsp">loan</a>
 </form>
 </div>
