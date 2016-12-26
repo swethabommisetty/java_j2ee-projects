@@ -17,7 +17,7 @@ import com.dhatriinfo.dao.DAOOperations;
 /**
  * Servlet implementation class UpdateServlet
  */
-//@WebServlet("/update")
+@WebServlet("/UpdateServlet")
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

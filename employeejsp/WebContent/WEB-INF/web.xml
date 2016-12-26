@@ -25,14 +25,7 @@
     <servlet-name>exam2</servlet-name>
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>exam3</servlet-name>
-    <servlet-class>com.dhatriinfo.controller.UpdateServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>exam3</servlet-name>
-    <url-pattern>/update</url-pattern>
-  </servlet-mapping>
+  
   <servlet>
     <servlet-name>exam6</servlet-name>
     <servlet-class>com.dhatriinfo.controller.Update2Servlet</servlet-class>
