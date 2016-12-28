@@ -2,6 +2,7 @@ package com.dhatriinfo.controller;
 import com.dhatriinfo.dao.*;
 import com.dhatriinfo.bean.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -40,6 +41,8 @@ public class Update2Servlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out=response.getWriter();
+		
 		String tempid=request.getParameter("search");
 		
 		DAOOperations dbo=new DAOOperations();
@@ -52,6 +55,8 @@ public class Update2Servlet extends HttpServlet {
 		RequestDispatcher requestDis=request.getRequestDispatcher("Update.jsp");
 		
 		requestDis.forward(request, response);
+	
+		
 	}
 
 }

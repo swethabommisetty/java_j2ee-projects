@@ -42,14 +42,16 @@ public class DeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		EmployeeBean e=new EmployeeBean();
+		
 		response.setContentType("text/html");  
 		PrintWriter out=response.getWriter();
+		
 		String eid=request.getParameter("id");
+		
 		DAOOperations dbo=new DAOOperations();
 		int res=dbo.delete(eid);
 		
-		out.print("id is deleted");
+		
 RequestDispatcher requestDispact=request.getRequestDispatcher("Succes.jsp");
 		
 		HttpSession session=request.getSession();
@@ -57,6 +59,17 @@ RequestDispatcher requestDispact=request.getRequestDispatcher("Succes.jsp");
 		if(res>0)
 		{
 		requestDispact.forward(request, response);
-	}
+	    }
+		
+		else
+		{
+			out.print("<html><body>");
+			out.print("<form action='Delete.jsp' method='post'"+ ">");
+			out.print("id is not present");
+			out.print("<input type='submit' value='back'>");
+			out.print("</form></body></html>");
+			
+		}
+		
 	}
 }

@@ -12,7 +12,6 @@
 </script>
 </head>
 
-
 <body style="background-color:Moccasin">
 <div align="center">
 <h1>Employee Info</h1>
@@ -28,21 +27,25 @@
     
 
     <tr>
-      <td>Enter Employee Name:</td>
-      <td><input type="text" name="employeeName" /></td>
+      <td>Enter Employee Name:<sup id="star">*</sup></td>
+      <td><input type="text" name="employeeName" id="employeename" onkeypress="return clearField()"/></td>
+     <td> <span id="error"></span></td>
     </tr>
 
     <tr>
-      <td>Enter Salary:</td>
-      <td><input type="text" name="employeeSalary" /></td>
+      <td>Enter Salary:<sup id="star">*</sup></td>
+      <td><input type="text" name="employeeSalary" id="employeesalary" onkeypress="return clearField()" /></td>
+    <td> <span id="error"></span></td>
     </tr>
      <tr>
       <td>Enter Location:</td>
       <td><input type="text" name="employeeLocation" /></td>
+   
     </tr>
     <tr>
       <td>Enter Experience:</td>
-      <td><input type="text" name="employeeExp" /></td>
+      <td><input type="text" name="employeeExp"/></td>
+    
     </tr>
     
 </table>

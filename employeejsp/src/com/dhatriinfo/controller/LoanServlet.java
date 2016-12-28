@@ -44,7 +44,9 @@ public class LoanServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");  
-		
+		PrintWriter out=response.getWriter();
+		try
+		{
 		String eid=request.getParameter("id");
 		DAOOperations dao=new DAOOperations();
 		ArrayList<EmployeeBean> empList=dao.loan(eid);
@@ -55,7 +57,17 @@ RequestDispatcher requestDispact=request.getRequestDispatcher("Loan1.jsp");
 		session.setAttribute("employeelist",empList);
 		
 		
-			requestDispact.forward(request, response);
+	    	requestDispact.forward(request, response);
+		}
+		catch(Exception e)
+		{
+			out.print("<html><body>");
+			out.print("<form action='Loan.jsp' method='post'"+ ">");
+			out.print("id id not present");
+			out.print("<input type='submit' value='back'>");
+			out.print("</form></body></html>");
+			
+		}
 		
 	}
 

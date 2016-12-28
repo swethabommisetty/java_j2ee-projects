@@ -1,6 +1,7 @@
 package com.dhatriinfo.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -42,7 +43,9 @@ public class SearchIdServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-String searchid=request.getParameter("searchElement");
+     PrintWriter out=response.getWriter();
+		
+		String searchid=request.getParameter("searchElement");
 		
 		DAOOperations dao=new DAOOperations();
 		
@@ -53,6 +56,9 @@ String searchid=request.getParameter("searchElement");
 		RequestDispatcher requestDis=request.getRequestDispatcher("Search2.jsp");
 		
 		requestDis.forward(request, response);
+      
+      
+      
 	}
 
 }
