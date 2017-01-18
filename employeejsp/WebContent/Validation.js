@@ -8,6 +8,7 @@ if(empid==""||empid==null)
 	document.getElementById("error").innerHTML="please enter id ";
 	return false;
 	}
+
 if(empname==""||empname==null)
 {
 document.getElementById("error").innerHTML="please enter name ";
