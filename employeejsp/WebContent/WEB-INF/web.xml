@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>employeejsp</display-name>
+  <welcome-file-list>
+    <welcome-file>Sample.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>Insert.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>exam1</servlet-name>
+    <servlet-class>com.dhatriinfo.controller.InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>exam1</servlet-name>
+    <url-pattern>/EmployeeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>exam2</servlet-name>
+    <servlet-class>com.dhatriinfo.controller.SearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>exam2</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>exam6</servlet-name>
+    <servlet-class>com.dhatriinfo.controller.Update2Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>exam6</servlet-name>
+    <url-pattern>/Updatedummy</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>exam4</servlet-name>
+    <servlet-class>com.dhatriinfo.controller.DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>exam4</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>exam5</servlet-name>
+    <servlet-class>com.dhatriinfo.controller.LoanServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>exam5</servlet-name>
+    <url-pattern>/loan</url-pattern>
+  </servlet-mapping>
+</web-app>
